@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="icon" type="imagem/png" href="assets/img/icons/pokeball.jpg" />
+   <link rel="stylesheet" href="css/style_cadastro.css">
+   <title>Registre-se</title>
+</head>
+<body>
+   <section id="main">
+      <div class="login_page">
+         <div class="navbar">
+            <div class="logo">
+               <img src="assets/img/icons/pokemon.webp">
+            </div>
+            <a href="index.html" class="btn_nav">
+               <img src="assets/img/icons/home.png">
+            </a>
+         </div>    
+         <div id="modal"></div>
+         <div class="container_form">
+            <div class="form">
+               <div class="title">
+                  <h1>Formulario de <span id="focus_text">Cadastro</span></h1>
+                  <h4>Cadastre-se sua conta gratuitamente</h4>
+               </div>
+               <h1 class="h1_avatar"><span id="focus_text">Escolha seu inicial</span></h1>
+               <div class="group_card">
+                  <div class="card_pokemon">
+                     <img src="assets/img/pokemon/pokemon/bulbasaur.png">
+                     <input type="radio" name="group_radio" value="Bulbasaur" checked>
+                  </div>
+                  <div class="card_pokemon">
+                     <img src="assets/img/pokemon/pokemon/charmander.png">
+                     <input type="radio" name="group_radio" value="Charmander">
+                  </div>
+                  <div class="card_pokemon">
+                     <img src="assets/img/pokemon/pokemon/squirtle.png">
+                     <input type="radio" name="group_radio" value="Squirtle">
+                  </div>
+               </div>
+               <div class="campos_form">
+                  <p>Nome</p>
+                  <input id="input_nome">
+                  <p>Login</p>
+                  <input id="input_login">
+                  <p>Gênero</p>
+                  <div class="genero">
+                     <div class="masculino">
+                        <img src="assets/img/pokemon/icons/masculino.png">
+                        <input type="radio" name="group_genero" value="M" id="1" checked>
+                     </div>
+                     <div class="feminino">
+                        <img src="assets/img/pokemon/icons/feminino.png">
+                        <input type="radio" name="group_genero" value="F" id="2">
+                     </div>                   
+                  </div>
+                  <div class="group2">
+                     <div class="campo_senha">
+                        <p>Senha</p>
+                        <input id="input_senha" onblur="validar_senha()" required>
+                     </div>
+                     <div class="campo_senha">
+                        <p>Confirmar senha</p>
+                        <input id="input_senha2" onblur="validar_senha()" required>
+                     </div>
+                  </div>
+                  <button class="btn" onclick="cadastrar()">Cadastrar</button>
+               </div>
+            </div>
+         </div>        
+      </div>
+      <div class="card">
+         <a href="https://www.linkedin.com/in/alex-silva-32a43620b/">
+            <img src="assets/img/icons/linkedin.png" />
+         </a>
+         <a href="mailto:1alex.contato@gmail.com">
+            <img src="assets/img/icons/gmail.png" />
+         </a>
+         <a href="https://github.com/AlexSoftW">
+            <img src="assets/img/icons/github.png" />
+         </a>
+      </div>
+   </section>
+</body>
+</html>
+
+<script>
+   function cadastrar() {
+       //Recupere o valor da nova input pelo nome do id
+       // Agora vá para o método fetch logo abaixo
+       var nomeVar = input_nome.value;
+       var generoVar = document.querySelector('input[name="group_genero"]:checked').value;
+       var loginVar = input_login.value;
+       var senhaVar = input_senha.value;
+       var confirmacaoSenhaVar = input_senha2.value;
+       var escolherPokemonVar = document.querySelector('input[name="group_radio"]:checked').value;
+
+       // Enviando o valor da nova input
+       fetch("/usuarios/cadastrar", {
+           method: "POST",
+           headers: {
+               "Content-Type": "application/json"
+           },
+           body: JSON.stringify({
+               // crie um atributo que recebe o valor recuperado aqui
+               // Agora vá para o arquivo routes/usuario.js
+               nomeServer: nomeVar,
+               generoServer: generoVar,
+               loginServer: loginVar,
+               senhaServer: senhaVar,
+               escolherPokemonServer: escolherPokemonVar
+           })
+       }).then(function (resposta) {
+
+           console.log("resposta: ", resposta);
+
+           if (resposta.ok) {
+               // window.alert('Cadastro realizado com Sucesso!✅')
+               modal.style.display = "flex";
+               modal.style.border = "5px solid #4ac35a";
+               modal.innerHTML = `
+               <div class="stars">
+                  <img src="assets/img/icons/sucess_star.gif">
+                  <img src="assets/img/icons/sucess_star.gif">
+               </div>
+               <div class="text">
+                  <p>Cadastro realizado com</p>
+                  <p>Sucesso!</p>
+               </div>
+               <div class="sucess">
+                  <img src="assets/img/icons/sucess.gif">
+               </div>
+               `;
+
+               setTimeout(() => {
+                   window.location = "login.html";
+               }, "3000")
+               
+               limparFormulario();
+           } else {
+               // window.alert('Houve um erro ao tentar realizar o cadastro!❌')
+               
+               modal.style.display = "flex";
+               modal.style.border = "5px solid #c34a4a";
+               modal.innerHTML = `
+               <div class="stars">
+                  <img src="assets/img/icons/error.gif">
+                  <img src="assets/img/icons/error.gif">
+               </div>
+               <div class="text">
+                  <p>Houve um erro ao tentar</p>
+                  <p>Cadastrar!</p>
+               </div>
+               <div class="sucess">
+                  <img src="assets/img/icons/fail.gif">
+               </div>
+               `;
+
+               setTimeout(() => {
+                  modal.style.display = "none"
+               }, 3000);
+               
+
+           }
+       }).catch(function (resposta) {
+           console.log(`#ERRO: ${resposta}`);
+
+       });
+
+       return false;
+   }
+
+   function validar_senha(){
+      var senhaVar = input_senha.value;
+      var confirmacaoSenhaVar = input_senha2.value;
+
+      if(senhaVar != confirmacaoSenhaVar && 
+         senhaVar != "" && confirmacaoSenhaVar != ""){
+         input_senha.style.color = "red"
+         input_senha2.style.color = "red"
+         input_senha.style.borderBottom = "3px solid #f25d5d";
+         input_senha2.style.borderBottom = "3px solid #f25d5d";
+
+         modal.style.display = "flex";
+               modal.style.border = "5px solid #c34a4a";
+               modal.innerHTML = `
+               <div class="stars">
+                  <img src="assets/img/icons/error.gif">
+                  <img src="assets/img/icons/error.gif">
+               </div>
+               <div class="text">
+                  <p>As senhas estão</p>
+                  <p>Incorretas!</p>
+               </div>
+               <div class="sucess">
+                  <img src="assets/img/icons/fail.gif">
+               </div>
+               `;
+
+               setTimeout(() => {
+                  modal.style.display = "none"
+               }, 3000);
+      } else{
+         input_senha.style.color = "black"
+         input_senha2.style.color = "black"
+         input_senha.style.borderBottom = "3px solid #715DF2";
+         input_senha2.style.borderBottom = "3px solid #715DF2";
+      }
+   }
+</script>
+

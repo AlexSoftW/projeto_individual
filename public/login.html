@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="icon" type="imagem/png" href="assets/img/icons/pokeball.jpg" />
+   <link rel="stylesheet" href="css/style_login.css">
+   <title>Login</title>
+</head>
+<body>
+   <section id="main">
+      <div class="login_page">
+         <div class="navbar">
+            <div class="logo">
+               <img src="assets/img/icons/pokemon.webp">
+            </div>
+            <a href="index.html" class="btn_nav">
+               <img src="assets/img/icons/home.png">
+            </a>
+         </div>    
+         <div class="container">
+            <div class="campos">
+               <div class="title">
+                  <h1>Bem-vindo <span id="focus_text">Treinador</span></h1>
+                  <h4>Está pronto para embarcar nessa aventura?</h4>
+               </div>
+               <div class="login_senha">
+                  <p>Login</p>
+                  <input type="text" id="login_input">
+                  <p>Senha</p>
+                  <input type="password" id="senha_input">
+                  <span id="span_error"></span>
+                  <button onclick="entrar()">Entrar</button>
+                  <div id="loading">
+                     <img src="assets/img/icons/loading.gif" width="50px">
+                  </div>
+                  <p class="p_cadastrar">Ainda não possui uma conta? <a href="cadastro.html"><span id="focus_text">Cadastre-se</span></a></p>
+               </div>
+            </div>
+         </div>
+            
+      </div>
+      <div class="card">
+         <a href="https://www.linkedin.com/in/alex-silva-32a43620b/">
+            <img src="assets/img/icons/linkedin.png" />
+         </a>
+         <a href="mailto:1alex.contato@gmail.com">
+            <img src="assets/img/icons/gmail.png" />
+         </a>
+         <a href="https://github.com/AlexSoftW">
+            <img src="assets/img/icons/github.png" />
+         </a>
+      </div>
+   </section>
+</body>
+</html>
+
+<script>
+
+function entrar() {
+
+   var loginVar = login_input.value;
+   var senhaVar = senha_input.value;
+
+   if (loginVar == "" || senhaVar == "") {
+      span_error.innerHTML = "❓ Preencha todos os campos"
+      span_error.style.color = "red";
+       finalizarAguardar();
+       return false;
+   }
+   else {
+      span_error.innerHTML = ""
+   }
+
+   console.log("FORM LOGIN: ", loginVar);
+   console.log("FORM SENHA: ", senhaVar);
+
+   fetch("/usuarios/autenticar", {
+       method: "POST",
+       headers: {
+           "Content-Type": "application/json"
+       },
+       body: JSON.stringify({
+           loginServer: loginVar,
+           senhaServer: senhaVar
+       })
+   }).then(function (resposta) {
+       console.log("ESTOU NO THEN DO entrar()!")
+
+       if (resposta.ok) {
+           console.log(resposta);
+
+           resposta.json().then(json => {
+               console.log(json);
+               console.log(JSON.stringify(json));
+
+               sessionStorage.LOGIN_USUARIO = json.login;
+               sessionStorage.NOME_USUARIO = json.nome;
+               sessionStorage.GENERO_USUARIO = json.genero;
+               sessionStorage.POKEMON_USUARIO = json.pokemonInicial;
+               sessionStorage.ID_USUARIO = json.idTreinador;
+               loading.style.display = "flex";
+
+               setTimeout(function () {
+                   window.location = "./treinador/home_treinador.html";
+               }, 1500); // apenas para exibir o loading
+
+           });
+
+       } else {
+         span_error.innerHTML = "❌ Login ou senha incorretos!"
+         console.log("Houve um erro ao tentar realizar o login!");
+         span_error.style.color = "red";
+
+           resposta.text().then(texto => {
+               console.error(texto);
+               finalizarAguardar(texto);
+           });
+       }
+
+   }).catch(function (erro) {
+       console.log(erro);
+   })
+
+   return false;
+}
+
+</script>

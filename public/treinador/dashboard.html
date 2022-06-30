@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link
+         rel="icon"
+         type="imagem/png"
+         href="../assets/img/icons/pokeball.jpg"/>
+      <link rel="stylesheet" href="../css/style_pagina_treinador.css" />
+      <title>Bem-vindo Treinador</title>
+   </head>
+   <body
+      onload="listar_all_pokemon_usuario(), porcento_capturado(), 
+   porcento_nao_capturado(), listar_capturado_semana(), listar_fugiu_semana()">
+      <section id="main">
+         <div class="container">
+            <div class="conteudo">
+               <div class="navbar">
+                  <div class="icons_pages">
+                     <div class="option_page">
+                        <a href="./home_treinador.html">
+                           <img src="../assets/img/pokemon/icons/great_ball.png"/>
+                           <p>Perfil</p>
+                        </a>
+                     </div>
+                     <div class="option_page">
+                        <hr />
+                        <a href="../pokemon_game/index.html">
+                           <img src="../assets/img/pokemon/icons/controle.png"/>
+                           <p>PLAY!</p>
+                        </a>
+                        <hr />
+                     </div>
+                     <div class="option_page focus_nav">
+                        <a href="#">
+                           <img src="../assets/img/pokemon/icons/dashboard.png"/>
+                           <p>Dashboard</p>
+                        </a>
+                        <hr />
+                     </div>
+                     <div class="option_page">
+                        <a href="./dados_globais.html">
+                           <img src="../assets/img/pokemon/icons/world.png" />
+                           <p>Dados globais</p>
+                        </a>
+                     </div>
+                  </div>
+                  <div class="sair">
+                     <hr />
+                     <button onclick="sair_sessao()">
+                        <img src="../assets/img/pokemon/icons/sair.png" />
+                     </button>
+                  </div>
+               </div>
+               <div class="dashboards">
+                  <div class="dashboard_group_1">
+                     <div class="title">
+                        <img src="../assets/img/pokemon/icons/dashboard_icon.png"/>
+                        <h1>Dashboards</h1>
+                     </div>
+                     <hr class="hr_divisorio" />
+                     <div class="grafico_pizza">
+                        <h2>% de chance de captura</h2>
+                        <div>
+                           <canvas id="chart_pizza"></canvas>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="dashboard_group_2">
+                     <div class="grafico_coluna">
+                        <h3>Qtd. pokémon capturado na semana</h3>
+                        <div>
+                           <canvas id="chart_column"></canvas>
+                        </div>
+                     </div>
+                     <h3>
+                        Status do pokémon <span id="focus_text">capturado</span>
+                     </h3>
+                     <div class="grafico_pokemon" id="grafico_pokemon">
+                        <div class="bag_pokemon" id="bag_pokemon"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../pokemon_game/capturar.js"></script>
+<script src="../js/home_treinador.js"></script>
+<script>
+
+   //Trazendo em uma session storage os valores da taxa de capturado e não capturado
+   var porcentoCapturado = sessionStorage.getItem("chave_capturado_porcento");
+   var porcentoNaoCapturado = sessionStorage.getItem(
+      "chave_nao_capturado_porcento"
+   );
+
+   //trazendo em uma session storage os valores dos dias da semana que o pokemon foi capturado
+   var domingo_gotcha = sessionStorage.getItem("domingo_capturado");
+   var segunda_feira_gotcha = sessionStorage.getItem("segunda_capturado");
+   var terca_feira_gotcha = sessionStorage.getItem("terça_capturado");
+   var quarta_feira_gotcha = sessionStorage.getItem("quarta_capturado");
+   var quinta_feira_gotcha = sessionStorage.getItem("quinta_capturado");
+   var sexta_feira_gotcha = sessionStorage.getItem("sexta_capturado");
+   var sabado_gotcha = sessionStorage.getItem("sabado_capturado");
+
+   //trazendo em uma session storage os valores dos dias da semana que o pokemon não foi capturado
+   var domingo_fail = sessionStorage.getItem("domingo_fugiu");
+   var segunda_feira_fail = sessionStorage.getItem("segunda_fugiu");
+   var terca_feira_fail = sessionStorage.getItem("terça_fugiu");
+   var quarta_feira_fail = sessionStorage.getItem("quarta_fugiu");
+   var quinta_feira_fail = sessionStorage.getItem("quinta_fugiu");
+   var sexta_feira_fail = sessionStorage.getItem("sexta_fugiu");
+   var sabado_fail = sessionStorage.getItem("sabado_fugiu");
+
+   // vetor para guardar os dados dos pokemon capturado
+   var array_semana_capturado = [
+      domingo_gotcha,
+      segunda_feira_gotcha,
+      terca_feira_gotcha,
+      quarta_feira_gotcha,
+      quinta_feira_gotcha,
+      sexta_feira_gotcha,
+      sabado_gotcha,
+   ];
+
+   // vetor para guardar os dados dos pokemon não capturado
+   var array_semana_fugiu = [
+      domingo_fail,
+      segunda_feira_fail,
+      terca_feira_fail,
+      quarta_feira_fail,
+      quinta_feira_fail,
+      sexta_feira_fail,
+      sabado_fail,
+   ];
+ 
+   //config dashboard coluna
+   const labels_column = [
+      "Segunda",
+      "Terça",
+      "Quarta",
+      "Quinta",
+      "Sexta",
+      "Sábado",
+      "Domingo",
+   ];
+
+   const data_column = {
+      labels: labels_column,
+      datasets: [
+      {
+        label: "Capturados",
+        backgroundColor: "#04D97665",
+        borderColor: "#04D976",
+        borderWidth: 1,
+        data: [
+         array_semana_capturado[1],
+         array_semana_capturado[2],
+         array_semana_capturado[3],
+         array_semana_capturado[4],
+         array_semana_capturado[5],
+         array_semana_capturado[6],
+         array_semana_capturado[0]],
+      },
+      {
+        label: "Fugiu",
+        backgroundColor: "#F25C0565",
+        borderColor: "#F25C05",
+        borderWidth: 1,
+        data: [
+        array_semana_fugiu[1],
+        array_semana_fugiu[2],
+        array_semana_fugiu[3],
+        array_semana_fugiu[4],
+        array_semana_fugiu[5],
+        array_semana_fugiu[6],
+        array_semana_fugiu[0]],
+      },
+      ],
+   };
+
+   const config_column = {
+      type: "bar",
+      data: data_column,
+      options: {
+         plugins: {
+            legend: false,
+         },
+      },
+   };
+
+   const grafico_coluna = new Chart(
+      document.getElementById("chart_column"),
+      config_column
+   );
+
+   //Config dashboard pizza
+   const data_pizza = {
+      labels: ["Capturado", "Fugiu"],
+      datasets: [
+         {
+            label: "My First Dataset",
+            data: [porcentoCapturado, porcentoNaoCapturado],
+            backgroundColor: ["#04D97699", "#F25C0599"],
+            hoverOffset: 4,
+         },
+      ],
+   };
+
+   const config_pizza = {
+      type: "pie",
+      data: data_pizza,
+   };
+
+   const grafico_pizza = new Chart(
+      document.getElementById("chart_pizza"),
+      config_pizza
+   );
+</script>

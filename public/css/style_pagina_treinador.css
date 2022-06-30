@@ -1,0 +1,697 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Changa&display=swap");
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+#focus_text {
+   background-image: linear-gradient(to bottom, steelblue, #43adde, turquoise);
+   background-clip: text;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   color: black;
+}
+
+#main {
+   display: flex;
+   background-image: url("../assets/img/home/waves2.svg");
+   background-size: cover;
+   width: 100%;
+   height: 100vh;
+   font-family: "Roboto", sans-serif;
+}
+
+.container {
+   display: flex;
+   width: 80%;
+   height: 80vh;
+   margin: auto;
+}
+
+.conteudo {
+   display: flex;
+   background-color: #f7f9fa;
+   display: flex;
+   width: 100%;
+   border-radius: 25px;
+   filter: drop-shadow(0 0 0.75rem #171717b4);
+}
+
+/* --------------------------------------------------------------------NAVBAR(LADOESQUERDO) */
+
+.conteudo .navbar {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   width: 10%;
+   min-width: 110px;
+   background-color: #335ac5;
+   border-top-left-radius: 25px;
+   border-bottom-left-radius: 25px;
+}
+
+.navbar .icons_pages {
+   height: 80%;
+   margin-top: 25px;
+}
+
+.icons_pages .option_page {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-evenly;
+   height: 20%;
+   word-wrap: break-word;
+}
+
+.option_page.focus_nav {
+   border-right: 4px solid #43adde;
+}
+
+.option_page a {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   color: white;
+   height: 100%;
+   font-family: "Changa", sans-serif;
+}
+
+.option_page:first-child img {
+   width: 50%;
+   border-radius: 50%;
+}
+
+.option_page hr {
+   width: 50%;
+   border: none;
+   height: 3px;
+   background-color: rgba(245, 245, 245, 0.607);
+}
+
+.navbar .sair {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-evenly;
+   height: 20%;
+}
+.sair button{
+   cursor: pointer;
+   background:none;
+   border: none;
+}
+
+.sair hr {
+   width: 60%;
+   border: none;
+   border-radius: 5px;
+   height: 4px;
+   background-color: rgba(245, 245, 245, 0.607);
+}
+
+/* ------------------------------------------------------TELA PRINCIPAL(MEIO) */
+
+.conteudo .main_page {
+   display: flex;
+   flex-direction: column;
+   width: 60%;
+   color: #2d2d2d;
+}
+
+.main_page .container_main_page {
+   width: 80%;
+   height: 100%;
+   margin: auto;
+}
+
+.main_page .titulo {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   font-size: 22px;
+   height: 20%;
+}
+.main_page .titulo h3 {
+   font-size: 15px;
+}
+
+.titulo hr {
+   border: none;
+   height: 10px;
+   width: 25%;
+   border-radius: 2px;
+   background: linear-gradient(to left, steelblue, #43adde, turquoise);
+}
+
+.main_page .atividades {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   height: 25%;
+}
+
+.atividades .card_atividade {
+   font-family: "Changa", sans-serif;
+   display: flex;
+   height: 70%;
+   border-radius: 6px;
+   box-shadow: 0 0 0.75rem #17171744;
+   background-color: white;
+}
+
+.card_atividade .card {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   width: 25%;
+}
+
+.card .title_card {
+   letter-spacing: 1.5px;
+   font-size: 18px;
+}
+
+.main_page .info {
+   height: 50%;
+}
+
+.info .title {
+   display: flex;
+   align-items: center;
+   height: 20%;
+}
+
+.info .info_group {
+   display: flex;
+   justify-content: space-between;
+   height: 80%;
+}
+
+.info_group .card_status_pessoal {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   width: 40%;
+   background-image: url("../assets/img/pokemon/background/wave_card2.svg");
+   background-size: cover;
+   border-radius: 6px;
+   box-shadow: 0 0 0.75rem #1717178b;
+   padding: 15px;
+   color: white;
+   word-wrap: break-word;
+}
+
+.card_status_pessoal #position img {
+   position: absolute;
+   left: 26%;
+   bottom: 5%;
+   width: 18%;
+   min-width: 120px;
+   filter: drop-shadow(0 0 0.75rem #171717b4);
+}
+
+.info_group .card_professor {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   width: 40%;
+   background-image: url("../assets/img/pokemon/background/wave_card2.svg");
+   background-size: cover;
+   border-radius: 6px;
+   box-shadow: 0 0 0.75rem #1717178b;
+   padding: 15px;
+   color: white;
+   word-wrap: break-word;
+}
+
+.card_professor #position img {
+   position: absolute;
+   right: 32%;
+   bottom: 5%;
+   width: 12%;
+   min-width: 80px;
+   filter: drop-shadow(0 0 0.75rem #171717b4);
+}
+
+.card_professor .title,
+.card_status_pessoal .title {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   height: 50%;
+}
+.card_professor .informacoes,
+.card_status_pessoal .informacoes {
+   display: flex;
+   flex-direction: initial;
+   align-items: center;
+   color: black;
+   height: 10%;
+}
+
+.card_professor .informacoes img,
+.card_status_pessoal .informacoes img {
+   width: 26px;
+}
+.card_professor .informacoes:last-child img,
+.card_status_pessoal .informacoes:last-child img {
+   width: 40px;
+}
+
+/* ------------------------------------------------------CARD POKEMON ESCOLHIDO(LADO DIREITO) */
+
+.container .pokemon {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   align-items: center;
+   width: 30%;
+   background-image: url("../assets/img/pokemon/background/waves_background.svg");
+   background-size: cover;
+}
+
+.pokemon .card {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   position: relative;
+   background-image: url("../assets/img/pokemon/background/wave_card.svg");
+   background-size: cover;
+   width: 70%;
+   height: 250px;
+   padding: 15px;
+   border: none;
+   border-radius: 16px;
+   background-color: white;
+   color: white;
+   filter: drop-shadow(0 0 0.75rem #171717a2);
+}
+
+.card .sub_title {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 35%;
+}
+
+.card .sub_title img {
+   width: 20px;
+}
+
+.pokemon .card .button_poke{
+   position: relative;
+   z-index: +1;
+   cursor: pointer;
+   border: none;
+   background-color: white;
+}
+
+.pokemon .card #pokemon_card {
+   position: absolute;
+   left: 42%;
+   top: 25%;
+   width: 70%;
+   min-width: 160px;
+}
+
+#pokemon_card img{
+   width: 15px;
+}
+
+.card .status {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   margin-top: 5px;
+   height: 60%;
+   color: black;
+}
+.status hr {
+   border: none;
+   height: 3px;
+   width: 35%;
+   background-image: linear-gradient(to left, steelblue, #43adde, turquoise);
+}
+.status img {
+   width: 50px;
+}
+
+.status .tipo {
+   display: flex;
+   align-items: center;
+}
+
+.pokemon .poder {
+   font-family: "Changa", sans-serif;
+   display: flex;
+   flex-direction: column;
+   height: 40%;
+   width: 70%;
+   background-color: white;
+   border-radius: 5px;
+   filter: drop-shadow(0 0 0.75rem #17171764);
+   padding: 10px;
+}
+
+.poder .atributo{
+   display: flex;
+   height: 25%;
+}
+
+.atributo .status{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-evenly;
+   width: 30%;
+}
+
+.atributo .status img{
+   width: 30%;
+}
+.atributo .status p{
+   font-size: 15px;
+}
+
+.barra_poder{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   width: 75%;
+}
+
+.barra_atk {
+   height: 70%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 3px;
+   background-color: rgba(255, 166, 0, 0.3);
+   box-shadow: 0 0 0.75rem #1717174b;
+}
+.barra_def {
+   height: 70%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 3px;
+   background-color: rgba(0, 255, 42, 0.3);
+   box-shadow: 0 0 0.75rem #1717174b;
+}
+.barra_hp {
+   height: 70%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 3px;
+   background-color: rgba(255, 0, 0, 0.3);
+   box-shadow: 0 0 0.75rem #1717174b;
+}
+.barra_spd {
+   height: 70%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 3px;
+   background-color: rgba(0, 89, 255, 0.3);
+   box-shadow: 0 0 0.75rem #1717174b;
+}
+
+/* ----------------------------------------DASHBOARD */
+
+.dashboards{
+   display: flex;
+   width: 100%;
+   height: 100%;
+}
+
+.dashboard_group_1{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   align-items: center;
+   width: 50%;
+   text-align: center;
+   border-right: 1px solid #2d2d2d5d;
+   filter: drop-shadow(0 0 0.75rem #17171764);
+   background-image: url("../assets/img/pokemon/background/background_blup_center.svg");
+   background-size: cover;
+}
+
+.dashboard_group_1 .title{
+   padding: 25px;
+   width: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.dashboard_group_1 .title img{
+   width: 50px;
+}
+
+.dashboard_group_1 .grafico_pizza{
+   width: 65%;
+}
+
+
+.dashboard_group_2{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-evenly;
+   width: 50%;
+}
+
+.dashboard_group_2 .grafico_coluna{
+   width: 85%;
+   min-width: 250px;
+}
+
+.grafico_coluna h3{
+   text-align: center;
+}
+
+.dashboard_group_2 .grafico_pokemon{
+   border: 1px solid #2d2d2d75;
+   border-radius: 5px;
+   width: 85%;
+   height: 40%;
+   overflow: auto;
+}
+
+.grafico_pokemon h3{
+   padding: 15px;
+}
+
+.grafico_pokemon .bag_pokemon{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 10px;
+}
+
+.bag_pokemon .item{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 20%;
+}
+
+.item img{
+   width: 60px;
+}
+
+/* ----------------------------------------DADOS GLOBAIS */
+
+/* OBS: essa classe .tabela_global foi criada no JS:home_treinador/function listar_all_pokemon */
+
+
+.more_information{
+   width: 35%;
+   background-image: url("../assets/img/pokemon/background/background_blup_center.svg");
+   background-size: cover;
+}
+
+.more_information .group_title{
+   font-family: "Changa", sans-serif;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 10%;
+   filter: drop-shadow(0 0 0.75rem #7d87f9ec);
+}
+
+.box_img{
+   display: flex;
+   justify-content: flex-end;
+   width: 10%;
+}
+.box_img img{
+   width: 100%;
+}
+
+.conteudo .dados_globais{
+   font-family: "Changa", sans-serif;
+   font-size: 18px;
+   display: flex;
+   flex-direction: column;
+   width: 55%;
+}
+
+#tabela{
+   overflow:auto;
+   display: flex;
+   flex-direction: column;
+   position: relative;
+}
+
+.dados_globais .tabela_global_title{
+   width: 100%;
+   padding: 15px;
+   background-color: #335ac5;
+   color: white;
+}
+
+.tabela_global_title tr{
+   display: flex;
+   justify-content: space-around;
+}
+
+.tabela_global_title td{
+   width: 20%;
+   text-align: center;
+}
+
+#tabela tbody .tabela_global{
+   border: 1px solid #2d2d2d6c;
+   display: flex;
+   justify-content: space-around;
+}
+
+.tabela_global td{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   width: 20%;
+}
+
+.tabela_global .td_pokemon{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+}
+
+.more_information .group_card{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-evenly;
+   height: 90%;
+}
+
+.more_information .grafico_circle{
+   display: flex;
+   flex-direction: column;
+   width: 200px;
+}
+
+.hr_divisorio{
+   width: 80%;
+   background: #2d2d2d2c;
+   border: none;
+   border-radius: 10px;
+   height: 2px;
+}
+
+.more_information .grafico_char{
+   background-image: url("../assets/img/pokemon/background/global_card.svg");
+   background-size: contain;
+   background-repeat: initial;
+   display: flex;
+   border-radius: 10px;
+   height: 30%;
+   width: 80%;
+   box-shadow: 0 0 0.75rem #2d2d2da8;
+}
+
+.grafico_char .medalha img{
+   position: absolute;
+   display: flex;
+   justify-content: flex-end;
+   left: 35%;
+   height: 15%;
+}
+
+.grafico_char .char{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: flex-end;
+   width: 30%;
+   height: 100%;
+}.char img{
+   width: 150%;
+   filter: drop-shadow(0 0 0.75rem #616ef9);
+}
+
+.grafico_char .group_information{
+   display: flex;
+   flex-direction: column;
+   width: 70%;
+}
+
+.group_information .name{
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
+   height: 40%;
+   font-size: 25px;
+   font-weight: bolder;
+   color: #2d2d2d;
+}
+.name p{
+   margin-left: 20px;
+}
+.name hr{
+   background: linear-gradient(to left, steelblue, #43adde, turquoise);
+   border: none;
+   height: 3px;
+   width: 75%;
+}
+
+.group_information .group_status{
+   height: 70%;
+   display: flex;
+}
+
+.group_status .qtd{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 40px;
+   color: #2d2d2d;
+   width: 40%;
+}
+
+.group_status .poke_capturados{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   font-size: 20px;
+   width: 60%;
+}
+

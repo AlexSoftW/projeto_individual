@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="icon" type="imagem/png" href="../assets/img/icons/pokeball.jpg" />
+      <link rel="stylesheet" href="../css/style_pagina_treinador.css" />
+      <title>Bem-vindo Treinador</title>
+   </head>
+   <body onload="listar_all_pokemon(), listar_bulbasaur_escolhido(), 
+      listar_charmander_escolhido(), listar_squirtle_escolhido(), listar_lider_capturado()">
+      <section id="main">
+         <div class="container">
+            <div class="conteudo">
+               <div class="navbar">
+                  <div class="icons_pages">
+                     <div class="option_page">
+                           <a href="./home_treinador.html">
+                              <img src="../assets/img/pokemon/icons/great_ball.png" />
+                              <p>Perfil</p>
+                           </a>
+                        </div>
+                     <div class="option_page">
+                        <hr />
+                        <a href="../pokemon_game/index.html">
+                           <img src="../assets/img/pokemon/icons/controle.png" />
+                           <p>PLAY!</p>
+                        </a>
+                        <hr />
+                     </div>
+                     <div class="option_page">
+                        <a href="./dashboard.html">
+                           <img src="../assets/img/pokemon/icons/dashboard.png" />
+                           <p>Dashboard</p>
+                        </a>
+                        <hr />
+                     </div>
+                     <div class="option_page focus_nav">
+                        <a href="#">
+                           <img src="../assets/img/pokemon/icons/world.png" />
+                           <p>Dados globais</p>
+                        </a>
+                     </div>
+                  </div>
+                  <div class="sair">
+                     <hr />
+                     <button onclick="sair_sessao()">
+                        <img src="../assets/img/pokemon/icons/sair.png" />
+                     </button>
+                  </div>
+               </div>
+               <div class="more_information">
+                  <div class="group_title">
+                     <div class="box_img">
+                        <img src="../assets/img/pokemon/icons/world_rotate.gif">
+                     </div>
+                     <h1>Dados <span id="focus_text">globais</span></h1>
+                  </div>               
+                  <div class="group_card">
+                     <h3>Pokémon inicial mais escolhido</h3>
+                     <div class="grafico_circle">
+                        <canvas id="myChart"></canvas>
+                      </div>
+                      <hr class="hr_divisorio">
+                      <h3>Maior taxa de captura</h3>
+                      <div class="grafico_char">
+                        <div class="medalha">
+                           <img src="../assets/img/pokemon/icons/medalha.png">
+                        </div>
+                        <div class="char" id="card_global_char">
+                           <p>?</p>
+                        </div>
+                        <div class="group_information">
+                           <div class="name" id="card_global_name">
+                              <p>?</p>
+                              <hr>
+                           </div>                            
+                           <div class="group_status">  
+                              <div class="qtd" id="card_global_qtd">
+                                 <h1>?</h1>
+                              </div>                             
+                              <div class="poke_capturados">
+                                 <p>Pokémons</p>
+                                 <p>capturados</p>
+                              </div>                            
+                           </div>
+                        </div> 
+                      </div>
+                  </div>  
+               </div>
+               <div class="dados_globais"> 
+                  <table class="tabela_global_title">
+                     <tr>
+                        <td>Treinador</td>
+                        <td>Data Tentativa</td>
+                        <td>Pokémon</td>
+                        <td>Status</td>
+                     </tr>
+                  </table>               
+                  <table id="tabela">                    
+                  </table>
+               </div>
+            </div>
+         </div>
+      </section>
+   </body>
+</html>
+
+<script src="../js/home_treinador.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+   var bulbasaur = sessionStorage.getItem('qtd_bulbasaur_escolhido');
+   var charmander = sessionStorage.getItem('qtd_charmander_escolhido');
+   var squirtle = sessionStorage.getItem('qtd_squirtle_escolhido');
+
+   const data = {
+  labels: [
+   'Bulbasaur',
+   'Charmander',
+   'Squirtle'
+  ],
+  datasets: [{
+    label: 'Pokémon mais escolhido',
+    data: [bulbasaur, charmander, squirtle],
+    backgroundColor: [
+      '#9AEB98',
+      '#EB695E',
+      '#7DA8EB'
+    ],
+    hoverOffset: 4
+  }]
+};
+   const config = {
+      type: 'doughnut',
+      data: data,
+   };
+ </script>
+ <script>
+   const myChart = new Chart(
+     document.getElementById('myChart'),
+     config
+   );
+ </script>
